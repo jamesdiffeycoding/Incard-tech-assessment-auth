@@ -1,10 +1,18 @@
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# GUIDANCE
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a React app in TS with your preferred tools. We are looking at structure, tools, and any best practices applied to improve productivity.
 
-## Deploy on Vercel
+Requirements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- at least two pages: login and home page
+- login should take users to home page. Use 'incard' for username/pass.
+- handle errors if incorrect details entered or session expired.
+- session should be persistent on reload until session expires.
+- support SSR
+- create 2-3 unit tests
+- deploy the app to Netlify/Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# DOCS
+
+- [Next.js Documentation](https://nextjs.org/docs) I.
+- [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
