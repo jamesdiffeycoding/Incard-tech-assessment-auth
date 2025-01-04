@@ -3,26 +3,35 @@ import { useState } from "react";
 
 export default function SignIn({ handleSuccessfulLogin }) {
   const { register, handleSubmit } = useForm();
-  const [alertVisibility, setAlertVisibility] = useState(false);
 
-  const onSubmit = (data) => {
-    if ((data.username === "incard" && data.password) === "incard") {
-      const expirationDate = new Date();
-      expirationDate.setMinutes(expirationDate.getMinutes() + 5);
-      handleSuccessfulLogin(expirationDate.toString());
+  function isLoginValid(credentails) {
+    return (
+      credentails.username === "incard" && credentails.password === "incard"
+    );
+  }
+
+  function onSubmit(credentails) {
+    if (isLoginValid(credentails)) {
+      const expiryDate = new Date();
+      expiryDate.setMinutes(expiryDate.getMinutes() + 5);
+      handleSuccessfulLogin(expiryDate.toString());
     } else {
       handleAlertVisbility(true);
     }
-  };
+  }
 
+  const [alertVisibility, setAlertVisibility] = useState(false);
   const handleAlertVisbility = (isVisible) => {
     setAlertVisibility(isVisible);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col justify-center align-center text-center"
+    >
       <div className="form-group m-2">
-        <label>
+        <label className="text-left">
           Username:{" "}
           <input
             name="username"
@@ -32,7 +41,7 @@ export default function SignIn({ handleSuccessfulLogin }) {
         </label>
       </div>
       <div className="form-group m-2">
-        <label>
+        <label className="text-left">
           Password:
           <input
             name="password"
@@ -46,7 +55,7 @@ export default function SignIn({ handleSuccessfulLogin }) {
       </div>
       {alertVisibility && (
         <div className="alert alert-warning flex justify-between m-2">
-          Login failed
+          Username and password are incorrect.
           <button onClick={() => handleAlertVisbility(false)}>
             <span>&times;</span>
           </button>
