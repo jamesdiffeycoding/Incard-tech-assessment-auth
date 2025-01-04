@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: "James Diffey - front-end assessment",
 };
 
-const loggedIn = true;
-
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-export default function SignIn({ handleAuthentication }) {
+export default function SignIn({ handleSuccessfulLogin }) {
   const { register, handleSubmit } = useForm();
   const [alertVisibility, setAlertVisibility] = useState(false);
 
   const onSubmit = (data) => {
     if ((data.username === "incard" && data.password) === "incard") {
-      handleAuthentication(true);
+      const expirationDate = new Date();
+      expirationDate.setMinutes(expirationDate.getMinutes() + 5);
+      handleSuccessfulLogin(expirationDate.toString());
     } else {
       handleAlertVisbility(true);
     }
