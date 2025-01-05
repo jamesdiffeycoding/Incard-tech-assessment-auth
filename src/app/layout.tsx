@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthWrapper } from "./context/AuthContext";
+import { EXPIRY_MINUTES } from "@/utils/helpers";
+import Header from "@/components/Header";
+
 export const metadata: Metadata = {
   title: "Incard Assessment",
   description: "James Diffey - front-end assessment submission",
 };
+
+const bodyClasses = "h-[100vh] flex flex-col justify-between bg-blue-200";
 
 export default async function RootLayout({
   children,
@@ -14,8 +19,17 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <AuthWrapper>{children}</AuthWrapper>
+      <body className={bodyClasses}>
+        <Header />
+        <AuthWrapper>
+          <section>
+            <p className="text-center text-gray-600">
+              In this app your login session expires after {EXPIRY_MINUTES}{" "}
+              minutes.
+            </p>
+            {children}
+          </section>
+        </AuthWrapper>
       </body>
     </html>
   );

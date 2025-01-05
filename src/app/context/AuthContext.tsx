@@ -3,14 +3,24 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 import {
-  getFutureDate_MinsAndSecs,
+  AuthContextInterface,
+  checkLoginExpired,
+  EXPIRY_MINUTES,
+  EXPIRY_SECONDS,
+  getDateInFuture,
   isCredentialsCorrect,
-  isLoginExpired,
   LOGIN_EXPIRY_KEY,
   OLD_DATE,
 } from "@/utils/helpers";
 
-const AuthContext = createContext<any>(undefined);
+const defaultAuthContext: AuthContextInterface = {
+  loginExpiryTime: OLD_DATE,
+  isCredentialsCorrect: () => false,
+  checkLoginExpired: () => false,
+  handleSuccessfulLogin: () => {},
+};
+
+const AuthContext = createContext<AuthContextInterface>(defaultAuthContext);
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const [loginExpiryTime, setLoginExpiryTime] = useState(
@@ -18,7 +28,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
   ); // OR operator prevents null value if nothing stored
 
   function handleSuccessfulLogin() {
-    const expiryDateStr = getFutureDate_MinsAndSecs(0, 5);
+    const expiryDateStr = getDateInFuture(EXPIRY_MINUTES, EXPIRY_SECONDS);
     setLoginExpiryTime(expiryDateStr);
     redirect("/home");
   }
@@ -31,7 +41,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         loginExpiryTime,
-        isLoginExpired,
+        checkLoginExpired,
         handleSuccessfulLogin,
         isCredentialsCorrect,
       }}
