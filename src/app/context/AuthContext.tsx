@@ -8,6 +8,7 @@ import {
   EXPIRY_MINUTES,
   EXPIRY_SECONDS,
   getDateInFuture,
+  isClientSide,
   isCredentialsCorrect,
   LOGIN_EXPIRY_KEY,
   OLD_DATE,
@@ -23,9 +24,7 @@ const defaultAuthContext: AuthContextInterface = {
 const AuthContext = createContext<AuthContextInterface>(defaultAuthContext);
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
-  const [loginExpiryTime, setLoginExpiryTime] = useState(
-    localStorage.getItem(LOGIN_EXPIRY_KEY) || OLD_DATE
-  ); // OR operator prevents null value if nothing stored
+  const [loginExpiryTime, setLoginExpiryTime] = useState(OLD_DATE);
 
   function handleSuccessfulLogin() {
     const expiryDateStr = getDateInFuture(EXPIRY_MINUTES, EXPIRY_SECONDS);
@@ -34,7 +33,20 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
+    // Ensure we only access localStorage on the client-side, not during SSR
+    if (isClientSide) {
+      const storedExpiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
+      if (storedExpiryTime) {
+        setLoginExpiryTime(storedExpiryTime);
+      }
+    }
+  }, []); // This effect runs only once on mount (client-side)
+
+  useEffect(() => {
+    // Ensure we only access localStorage on the client-side, not during SSR
+    if (isClientSide) {
+      localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
+    }
   }, [loginExpiryTime]);
 
   return (

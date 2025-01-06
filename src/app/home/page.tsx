@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { redirect } from "next/navigation";
@@ -7,12 +8,15 @@ export default function Home() {
   const { loginExpiryTime, checkLoginExpired } = useAuthContext();
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       if (checkLoginExpired(loginExpiryTime)) {
         redirect("/login");
       }
     }, 1000);
-  }, []);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [loginExpiryTime, checkLoginExpired]);
 
   return (
     <div className="text-center font-bold">

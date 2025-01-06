@@ -1,9 +1,16 @@
+import Image from "next/image";
+import Link from "next/link";
 export default function Header() {
   return (
     <div className="flex justify-center align-center bg-black w-full p-2">
-      <a href="/" aria-label="Go to Home Page">
-        <img className="h-[1.8rem]" src="/IncardLogo.jpg" alt="Incard Logo" />
-      </a>{" "}
+      <Link href="/home" aria-label="Go to Home Page">
+        <Image
+          width={100} /* px */
+          height={50} /* px */
+          src="/IncardLogo.jpg"
+          alt="Incard Logo"
+        />
+      </Link>
     </div>
   );
 }

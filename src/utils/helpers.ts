@@ -15,9 +15,9 @@ export function checkLoginExpired(loginExpiry: string) {
   const msExpiry = new Date(loginExpiry).getTime();
   return msNow > msExpiry;
 }
-export const EXPIRY_MINUTES = 5;
+export const EXPIRY_MINUTES = 0;
 
-export const EXPIRY_SECONDS = 0;
+export const EXPIRY_SECONDS = 5;
 
 export function getDateInFuture(minutes: number, seconds: number) {
   const expiryDate = new Date();
@@ -29,6 +29,8 @@ export function getDateInFuture(minutes: number, seconds: number) {
 export function isCredentialsCorrect(credentials: CredentialsInterface) {
   return credentials.username === "incard" && credentials.password === "incard";
 }
+
+export const isClientSide = typeof window !== "undefined";
 
 export const LOGIN_EXPIRY_KEY = "login-expiry"; // local storage key
 

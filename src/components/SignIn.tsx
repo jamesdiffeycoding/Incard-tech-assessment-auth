@@ -29,7 +29,7 @@ export default function SignIn() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center align-center text-center"
+      className="flex flex-col justify-center align-center text-center mt-4"
     >
       <div className="form-group m-2">
         <label className="text-left">
