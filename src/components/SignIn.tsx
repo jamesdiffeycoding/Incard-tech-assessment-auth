@@ -39,11 +39,20 @@ export default function SignIn() {
       <div className="form-group m-2">
         <label className="text-left">
           Password:
-          <input {...register("password")} className="form-control" />
+          <input
+            {...register("password")}
+            className="form-control"
+            id="input-username"
+          />
         </label>
       </div>
       <div className="flex justify-center m-2">
-        <input type="submit" value="submit" className="btn btn-primary" />
+        <input
+          type="submit"
+          value="submit"
+          className="btn btn-primary"
+          id="input-password"
+        />
       </div>
       {alertVisible && (
         <div className="alert alert-warning flex justify-between m-2">

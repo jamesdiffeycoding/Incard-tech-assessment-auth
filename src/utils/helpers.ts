@@ -1,13 +1,15 @@
+// File sorted alphabetically
+
 export interface AuthContextInterface {
-  isCredentialsCorrect: (credentials: CredentialsInterface) => boolean;
   checkLoginExpired: (loginExpiry: string) => boolean;
   handleSuccessfulLogin: () => void;
+  isCredentialsCorrect: (credentials: CredentialsInterface) => boolean;
   loginExpiryTime: string;
 }
 
 interface CredentialsInterface {
-  username: string;
   password: string;
+  username: string;
 }
 
 export function checkLoginExpired(loginExpiry: string) {
@@ -15,9 +17,10 @@ export function checkLoginExpired(loginExpiry: string) {
   const msExpiry = new Date(loginExpiry).getTime();
   return msNow > msExpiry;
 }
-export const EXPIRY_MINUTES = 0;
 
-export const EXPIRY_SECONDS = 5;
+export const EXPIRY_MINUTES = 1;
+
+export const EXPIRY_SECONDS = 0;
 
 export function getDateInFuture(minutes: number, seconds: number) {
   const expiryDate = new Date();
@@ -36,3 +39,5 @@ export const LOGIN_EXPIRY_KEY = "login-expiry"; // local storage key
 
 export const OLD_DATE =
   "Sun Jan 01 1980 00:00:00 GMT+0000 (Greenwich Mean Time)";
+
+export const REFRESH_FREQUENCY_IN_MS = 5000; // 5 seconds

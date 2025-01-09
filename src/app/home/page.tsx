@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import { redirect } from "next/navigation";
+import { REFRESH_FREQUENCY_IN_MS } from "@/utils/helpers";
 
 export default function Home() {
   const { loginExpiryTime, checkLoginExpired } = useAuthContext();
@@ -12,7 +13,7 @@ export default function Home() {
       if (checkLoginExpired(loginExpiryTime)) {
         redirect("/login");
       }
-    }, 1000);
+    }, REFRESH_FREQUENCY_IN_MS);
     return () => {
       clearInterval(interval);
     };
