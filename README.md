@@ -1,5 +1,4 @@
-# README.MD
-
+# Incard Tech Assessment in React JS
 ## My submission
 
 My task is available at https://incard-tech-assessment-auth.vercel.app/home.
