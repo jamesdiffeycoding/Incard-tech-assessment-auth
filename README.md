@@ -14,7 +14,7 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 ### Requirements
 
 - at least two pages: login and home page, (✔)
-- login should take users to home page - use 'incard' for username/passwprd, (✔)
+- login should take users to home page - use 'incard' for username/password, (✔)
 - handle errors if incorrect details entered or session expired, (✔)
 - session should be persistent on reload until session expires, (✔)
 - support SSR, (✔)
