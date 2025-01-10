@@ -23,7 +23,7 @@ export default function Home() {
     <div className="text-center font-bold">
       {checkLoginExpired(loginExpiryTime)
         ? "Please log in."
-        : `At ${loginExpiryTime.slice(
+        : `Hi there! At ${loginExpiryTime.slice(
             16,
             24
           )} you will be redirected to login.`}

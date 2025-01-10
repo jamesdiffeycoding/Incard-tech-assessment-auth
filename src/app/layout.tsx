@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "James Diffey - front-end assessment submission",
 };
 
-const bodyClasses = "h-[100vh] flex flex-col justify-between bg-blue-200";
+const bodyClasses = "h-[100vh] flex flex-col bg-blue-200";
 
 export default async function RootLayout({
   children,
@@ -22,7 +22,7 @@ export default async function RootLayout({
       <body className={bodyClasses}>
         <Header />
         <AuthWrapper>
-          <section>
+          <section className="h-full flex flex-col justify-center items-center">
             {children}
             <p className="text-center text-gray-600 mt-2">
               In this app your login session expires after {EXPIRY_MINUTES}{" "}
