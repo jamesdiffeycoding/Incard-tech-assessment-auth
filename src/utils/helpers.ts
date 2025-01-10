@@ -38,4 +38,4 @@ export const LOGIN_EXPIRY_KEY = "login-expiry"; // local storage key
 export const OLD_DATE =
   "Sun Jan 01 1980 00:00:00 GMT+0000 (Greenwich Mean Time)";
 
-export const REFRESH_FREQUENCY_IN_MS = 5000; // 5 seconds
+export const REFRESH_FREQUENCY_IN_MS = 3000;
