@@ -1,5 +1,3 @@
-// File sorted alphabetically
-
 export interface AuthContextInterface {
   checkLoginExpired: (loginExpiry: string) => boolean;
   handleSuccessfulLogin: () => void;
@@ -7,7 +5,7 @@ export interface AuthContextInterface {
   loginExpiryTime: string;
 }
 
-interface CredentialsInterface {
+export interface CredentialsInterface {
   password: string;
   username: string;
 }

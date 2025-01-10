@@ -2,22 +2,18 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useAuthContext } from "../app/context/AuthContext";
 import { redirect } from "next/navigation";
-
-interface Credentials {
-  username: string;
-  password: string;
-}
+import { CredentialsInterface } from "@/utils/helpers";
 
 export default function SignIn() {
-  const { register, handleSubmit } = useForm<Credentials>();
+  const { handleSuccessfulLogin, isCredentialsCorrect } = useAuthContext();
+  const { register, handleSubmit } = useForm<CredentialsInterface>();
   const [alertVisible, setAlertVisible] = useState(false);
+
   function handleAlertVisible(isVisible: boolean) {
     setAlertVisible(isVisible);
   }
 
-  const { handleSuccessfulLogin, isCredentialsCorrect } = useAuthContext();
-
-  function onSubmit(data: Credentials) {
+  function onSubmit(data: CredentialsInterface) {
     if (isCredentialsCorrect(data)) {
       handleSuccessfulLogin();
       redirect("/home");
@@ -29,14 +25,14 @@ export default function SignIn() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center align-center text-center mt-4"
+      className="flex flex-col justify-center align-center text-center"
     >
       <div className="form-group m-2">
         <label className="text-left">
           Username: <input {...register("username")} className="form-control" />
         </label>
       </div>
-      <div className="form-group m-2">
+      <div className="form-group">
         <label className="text-left">
           Password:
           <input
@@ -46,7 +42,7 @@ export default function SignIn() {
           />
         </label>
       </div>
-      <div className="flex justify-center m-2">
+      <div className="flex justify-center mt-3">
         <input
           type="submit"
           value="submit"

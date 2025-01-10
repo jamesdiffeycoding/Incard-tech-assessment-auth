@@ -23,11 +23,11 @@ export default async function RootLayout({
         <Header />
         <AuthWrapper>
           <section>
-            <p className="text-center text-gray-600">
-              In this app your login session expires after {EXPIRY_MINUTES}{" "}
-              minutes.
-            </p>
             {children}
+            <p className="text-center text-gray-600 mt-2">
+              In this app your login session expires after {EXPIRY_MINUTES}{" "}
+              minute(s).
+            </p>
           </section>
         </AuthWrapper>
       </body>

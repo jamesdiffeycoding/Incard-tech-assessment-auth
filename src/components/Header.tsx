@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 export default function Header() {
   return (
     <div className="flex justify-center align-center bg-black w-full p-2">
