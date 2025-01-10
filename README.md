@@ -1,8 +1,9 @@
 # Incard Tech Assessment in React JS
+
 ## My submission
 
-My task is available at https://incard-tech-assessment-auth.vercel.app/home.
-The repo is available at https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth.
+[Deployed site](https://incard-tech-assessment-auth.vercel.app/home).
+[GitHub repository](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
 
 ## Task overview
 
