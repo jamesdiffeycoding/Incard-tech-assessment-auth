@@ -25,7 +25,6 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 
 - Vitest used for Unit testing, files end with '.test.ts': currently cover self-built functions, such as confirming valid credential inputs or generating login expiry dates in the future.
 - Playwright used for End-To-End (E2E) testing: currently covers user flow of signing in, authentication and redirects.
-- files internally organised alphabetically where possible
 - useContext hook used to share authorisation state around multiple pages
 - redirects used to ensure up-to-date login status
 - helper functions and constants including authorisation duration organised in /utils
