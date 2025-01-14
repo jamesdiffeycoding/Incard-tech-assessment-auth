@@ -5,7 +5,7 @@
 [Deployed site](https://incard-tech-assessment-auth.vercel.app/home).
 [GitHub repository](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
 
-## Task overview
+### Task overview
 
 This tech test assignment was assigned by Incard. Instructions are below:
 
@@ -21,7 +21,7 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 - create 2-3 unit tests, (✔, with added E2E tests)
 - deploy the app to Netlify/Vercel (✔)
 
-## Developer decisions and guidance
+## Decisions and guidance
 
 - Vitest used for Unit testing, files end with '.test.ts': currently cover self-built functions, such as confirming valid credential inputs or generating login expiry dates in the future.
 - Playwright used for End-To-End (E2E) testing: currently covers user flow of signing in, authentication and redirects.
