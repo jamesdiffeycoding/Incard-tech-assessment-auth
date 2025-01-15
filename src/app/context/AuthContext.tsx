@@ -12,7 +12,7 @@ import {
   isCredentialsCorrect,
   LOGIN_EXPIRY_KEY,
   OLD_DATE,
-} from "@/utils/helpers";
+} from "@/utils";
 
 const defaultAuthContext: AuthContextInterface = {
   loginExpiryTime: OLD_DATE,
@@ -33,17 +33,15 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    // Ensure we only access localStorage on the client-side, not during SSR
     if (isClientSide) {
       const storedExpiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
       if (storedExpiryTime) {
         setLoginExpiryTime(storedExpiryTime);
       }
     }
-  }, []); // This effect runs only once on mount (client-side)
+  }, []);
 
   useEffect(() => {
-    // Ensure we only access localStorage on the client-side, not during SSR
     if (isClientSide) {
       localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
     }

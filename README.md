@@ -11,15 +11,15 @@ This tech test assignment was assigned by Incard. Instructions are below:
 
 Create a React app in TS with your preferred tools. We are looking at structure, tools, and any best practices applied to improve productivity.
 
-### Requirements
+### Requirements - all met (✔)
 
-- at least two pages: login and home page, (✔)
-- login should take users to home page - use 'incard' for username/password, (✔)
-- handle errors if incorrect details entered or session expired, (✔)
-- session should be persistent on reload until session expires, (✔)
-- support SSR, (✔)
-- create 2-3 unit tests, (✔, with added E2E tests)
-- deploy the app to Netlify/Vercel (✔)
+- at least two pages: login and home page
+- login should take users to home page - use 'incard' for username/password
+- handle errors if incorrect details entered or session expired
+- session should be persistent on reload until session expires (I added a login expiration timeout, since the site would contain valuable information)
+- support SSR
+- create 2-3 unit tests (I added additional E2E tests)
+- deploy the app to Netlify/Vercel
 
 ## Decisions and guidance
 
@@ -29,7 +29,6 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 - redirects used to ensure up-to-date login status
 - helper functions and constants including authorisation duration organised in /utils
 - React Hook Form used for sign in form management
-- Bootstrap used for quick, minimal styling
 - TypeScript used for type-checking
 - NextJS used for SSR
 - local storage used for maintaining login expiry

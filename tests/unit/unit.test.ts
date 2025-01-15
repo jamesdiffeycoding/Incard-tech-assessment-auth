@@ -8,7 +8,7 @@ import {
   getDateInFuture,
   isCredentialsCorrect,
   OLD_DATE,
-} from "../../src/utils/helpers";
+} from "../../src/utils";
 
 test("Incard credentials valid.", () => {
   expect(isCredentialsCorrect({ username: "incard", password: "incard" })).toBe(
