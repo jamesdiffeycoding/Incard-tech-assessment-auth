@@ -19,6 +19,7 @@ const defaultAuthContext: AuthContextInterface = {
   isCredentialsCorrect: () => false,
   checkLoginExpired: () => false,
   handleSuccessfulLogin: () => {},
+  logoutEarly: () => {},
 };
 
 const AuthContext = createContext<AuthContextInterface>(defaultAuthContext);
@@ -41,6 +42,11 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  function logoutEarly() {
+    setLoginExpiryTime(OLD_DATE);
+    redirect("/");
+  }
+
   useEffect(() => {
     if (isClientSide) {
       localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
@@ -54,6 +60,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
         checkLoginExpired,
         handleSuccessfulLogin,
         isCredentialsCorrect,
+        logoutEarly,
       }}
     >
       {children}

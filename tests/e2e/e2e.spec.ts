@@ -45,3 +45,17 @@ test("Session remains until expiration then redirects", async ({ page }) => {
   await page.waitForTimeout(2 * REFRESH_FREQUENCY_IN_MS); // wait 2 refresh cycles and expect a redirect back to the login page
   await expect(page).toHaveURL(SERVER + "/");
 });
+
+test("logoutEarly button redirects to login", async ({ page }) => {
+  await page.goto(SERVER);
+  const username = page.getByLabel("username");
+  await username.fill("incard");
+  const password = page.getByLabel("password");
+  await password.fill("incard");
+  const submitButton = page.getByRole("button", { name: "Log in" });
+  await submitButton.click();
+  await expect(page).toHaveURL(SERVER + "/home");
+  const logoutEarlyButton = page.getByRole("button", { name: "Log out early" });
+  await logoutEarlyButton.click();
+  await expect(page).toHaveURL(SERVER + "/");
+});

@@ -3,6 +3,7 @@ export interface AuthContextInterface {
   handleSuccessfulLogin: () => void;
   isCredentialsCorrect: (credentials: CredentialsInterface) => boolean;
   loginExpiryTime: string;
+  logoutEarly: () => void;
 }
 
 export interface CredentialsInterface {
@@ -16,9 +17,9 @@ export function checkLoginExpired(loginExpiry: string) {
   return msNow > msExpiry;
 }
 
-export const EXPIRY_MINUTES = 3;
+export const EXPIRY_MINUTES = 10;
 
-export const EXPIRY_SECONDS = 30;
+export const EXPIRY_SECONDS = 0;
 
 export const EXPIRY_TIME_FOR_DISPLAY = `${
   EXPIRY_MINUTES > 0

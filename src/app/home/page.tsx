@@ -9,7 +9,7 @@ import HeaderLogo from "@/components/HeaderLogo";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const { loginExpiryTime, checkLoginExpired } = useAuthContext();
+  const { loginExpiryTime, checkLoginExpired, logoutEarly } = useAuthContext();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,15 +26,25 @@ export default function Home() {
     <div className="custom-grid h-full w-full">
       {/* LEFT PANE */}
       <section className="flex flex-col justify-center items-center">
-        <div className="max-w-[467px] w-full p-4">
+        <div className="max-w-[467px] w-full p-4 grid gap-6">
           <HeaderLogo />
+          {checkLoginExpired(loginExpiryTime) ? (
+            "Please log in."
+          ) : (
+            <>
+              <h1>Welcome back!</h1>
+              {`At ${loginExpiryTime.slice(16, 24)} GMT you will be
+              redirected to login again.`}
+            </>
+          )}
+          <button
+            className="px-4 py-2 max-w-[140px] cursor-pointer rounded-lg bg-orange-300 focus:bg-orange-400 hover:bg-orange-400 text-black"
+            onClick={() => logoutEarly()}
+          >
+            {" "}
+            Log out early
+          </button>
 
-          {checkLoginExpired(loginExpiryTime)
-            ? "Please log in."
-            : `Hi there! At ${loginExpiryTime.slice(
-                16,
-                24
-              )} you will be redirected to login.`}
           <Footer />
         </div>
       </section>
