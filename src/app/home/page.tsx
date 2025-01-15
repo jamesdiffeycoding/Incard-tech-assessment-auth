@@ -29,7 +29,7 @@ export default function Home() {
         <div className="max-w-[467px] w-full p-4 grid gap-6">
           <HeaderLogo />
           {checkLoginExpired(loginExpiryTime) ? (
-            "Please log in."
+            "Please log in. You will now be redirected to the login page."
           ) : (
             <>
               <h1>Welcome back!</h1>

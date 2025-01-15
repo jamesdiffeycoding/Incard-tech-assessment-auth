@@ -1,17 +1,17 @@
 # Incard Tech Assessment in React JS
 
-## My submission
-
-[Deployment](https://incard-tech-assessment-auth.vercel.app/home).
-[Repo](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
-
-### Task overview
+## Task overview
 
 This tech test assignment was assigned by Incard. Instructions are below:
 
 Create a React app in TS with your preferred tools. We are looking at structure, tools, and any best practices applied to improve productivity.
 
-### Requirements - all met (✔)
+## My submission
+
+[Deployment](https://incard-tech-assessment-auth.vercel.app/home).
+[Repo](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
+
+## Requirements - all met (✔)
 
 - at least two pages: login and home page
 - login should take users to home page - use 'incard' for username/password
@@ -24,7 +24,7 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 ## Decisions and guidance
 
 - NextJS used for SSR
-- Vitest used for Unit testing, files end with '.test.ts': currently cover self-built functions, such as confirming valid credential inputs or generating login expiry dates in the future.
+- Vitest used for Unit testing: currently cover self-built functions, such as confirming valid credential inputs or generating login expiry dates in the future.
 - Playwright used for End-To-End (E2E) testing: currently covers user flow of signing in, signing out and session expiry-driven redirects.
 - React Hook Form used for sign in form and error handling
 - TypeScript used for type-checking
