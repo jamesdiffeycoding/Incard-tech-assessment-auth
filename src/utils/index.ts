@@ -16,9 +16,19 @@ export function checkLoginExpired(loginExpiry: string) {
   return msNow > msExpiry;
 }
 
-export const EXPIRY_MINUTES = 1;
+export const EXPIRY_MINUTES = 3;
 
-export const EXPIRY_SECONDS = 0;
+export const EXPIRY_SECONDS = 30;
+
+export const EXPIRY_TIME_FOR_DISPLAY = `${
+  EXPIRY_MINUTES > 0
+    ? EXPIRY_MINUTES + (EXPIRY_MINUTES > 1 ? " minutes" : " minute")
+    : ""
+}${EXPIRY_MINUTES > 0 && EXPIRY_SECONDS > 0 ? " " : ""}${
+  EXPIRY_SECONDS > 0
+    ? EXPIRY_SECONDS + (EXPIRY_SECONDS > 1 ? " seconds" : " second")
+    : ""
+}`;
 
 export function getDateInFuture(minutes: number, seconds: number) {
   const expiryDate = new Date();

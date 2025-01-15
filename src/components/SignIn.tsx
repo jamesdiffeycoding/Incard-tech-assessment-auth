@@ -5,22 +5,26 @@ import { redirect } from "next/navigation";
 import { CredentialsInterface } from "@/utils";
 
 export default function SignIn() {
-  const { handleSuccessfulLogin, isCredentialsCorrect } = useAuthContext();
-  const { register, handleSubmit } = useForm<CredentialsInterface>();
-  const [alertVisible, setAlertVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  function handleAlertVisible(isVisible: boolean) {
-    setAlertVisible(isVisible);
-  }
+  const { handleSuccessfulLogin, isCredentialsCorrect } = useAuthContext();
+  const [wrongCredentialsDisplay, setWrongCredentialsDisplay] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<CredentialsInterface>();
 
   function onSubmit(data: CredentialsInterface) {
     if (isCredentialsCorrect(data)) {
       handleSuccessfulLogin();
       redirect("/home");
     } else {
-      handleAlertVisible(true);
+      changeWrongCredentialsDisplay(true);
     }
+  }
+
+  function changeWrongCredentialsDisplay(value: boolean) {
+    setWrongCredentialsDisplay(value);
   }
 
   function toggleShowPassword() {
@@ -36,53 +40,64 @@ export default function SignIn() {
       <h2 className="">Log in to your Incard account.</h2>
       <label className="text-left">
         Username{" "}
+        {errors.username && <span className="text-red-400">- too short</span>}
         <input
-          {...register("username")}
+          {...register("username", {
+            required: true,
+            minLength: 5,
+          })}
           aria-label="username"
-          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
           autoCorrect="off"
+          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
+          onFocus={() => changeWrongCredentialsDisplay(false)}
           spellCheck="false"
         />
       </label>
       <label className="text-left">
-        Password
+        Password{" "}
+        {errors.password && <span className="text-red-400">- too short</span>}
         <div className="w-full relative">
           <img
+            alt="Show password icon"
+            className="text-white m-[0.7rem] absolute right-0 hover:cursor-pointer"
+            onClick={toggleShowPassword}
+            height={16}
             src={
               showPassword
                 ? "./showPasswordIconHidden.svg"
                 : "./showPasswordIcon.svg"
             }
-            className="text-white m-[0.7rem] absolute right-0 hover:cursor-pointer"
-            onClick={toggleShowPassword}
-            alt="Show password icon"
             width={16}
-            height={16}
           />
         </div>
         <input
-          {...register("password")}
+          {...register("password", {
+            required: true,
+            minLength: 5,
+          })}
           aria-label="password"
-          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
-          type={showPassword ? "text" : "password"}
           autoCorrect="off"
+          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
+          onFocus={() => changeWrongCredentialsDisplay(false)}
           spellCheck="false"
+          type={showPassword ? "text" : "password"}
         ></input>
       </label>
-      <div className="flex justify-center mt-3">
+      <div className="flex flex-col mt-3 align-center">
         <input
+          className="py-2 cursor-pointer rounded-lg bg-lime-400 focus:bg-lime-500 hover:bg-lime-500 text-black"
           type="submit"
           value="Log in"
-          className="px-4 py-2 rounded-lg bg-lime-400 focus:bg-lime-500 hover:bg-lime-500 text-black"
         />
       </div>
-      {alertVisible && (
-        <div className="alert alert-warning flex justify-between m-2">
-          Username and password are incorrect.
-          <button onClick={() => handleAlertVisible(false)}>
-            <span>&times;</span>
-          </button>
-        </div>
+      {wrongCredentialsDisplay && (
+        <button
+          className="text-red-500 text-center"
+          onClick={() => changeWrongCredentialsDisplay(false)}
+          onFocus={() => changeWrongCredentialsDisplay(false)}
+        >
+          Either username or password incorrect.
+        </button>
       )}
     </form>
   );
