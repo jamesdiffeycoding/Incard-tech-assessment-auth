@@ -2,8 +2,8 @@
 
 ## My submission
 
-[Deployed site](https://incard-tech-assessment-auth.vercel.app/home).
-[GitHub repository](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
+[Deployment](https://incard-tech-assessment-auth.vercel.app/home).
+[Repo](https://github.com/jamesdiffeycoding/Incard-tech-assessment-auth).
 
 ### Task overview
 
