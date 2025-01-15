@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { redirect } from "next/navigation";
 import {
-  AuthContextInterface,
+  TAuthContext,
   checkLoginExpired,
   EXPIRY_MINUTES,
   EXPIRY_SECONDS,
@@ -14,7 +14,7 @@ import {
   OLD_DATE,
 } from "@/utils";
 
-const defaultAuthContext: AuthContextInterface = {
+const defaultAuthContext: TAuthContext = {
   loginExpiryTime: OLD_DATE,
   isCredentialsCorrect: () => false,
   checkLoginExpired: () => false,
@@ -22,7 +22,11 @@ const defaultAuthContext: AuthContextInterface = {
   logoutEarly: () => {},
 };
 
-const AuthContext = createContext<AuthContextInterface>(defaultAuthContext);
+const AuthContext = createContext<TAuthContext>(defaultAuthContext);
+
+export function useAuthContext() {
+  return useContext(AuthContext);
+}
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const [loginExpiryTime, setLoginExpiryTime] = useState(OLD_DATE);
@@ -66,8 +70,4 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuthContext() {
-  return useContext(AuthContext);
 }

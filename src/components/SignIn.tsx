@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useAuthContext } from "../app/context/AuthContext";
 import { redirect } from "next/navigation";
-import { CredentialsInterface } from "@/utils";
+import { TCredentials } from "@/utils";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,9 +12,9 @@ export default function SignIn() {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<CredentialsInterface>();
+  } = useForm<TCredentials>();
 
-  function onSubmit(data: CredentialsInterface) {
+  function onSubmit(data: TCredentials) {
     if (isCredentialsCorrect(data)) {
       handleSuccessfulLogin();
       redirect("/home");

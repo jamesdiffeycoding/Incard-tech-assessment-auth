@@ -1,20 +1,20 @@
-export interface AuthContextInterface {
+export type TAuthContext = {
   checkLoginExpired: (loginExpiry: string) => boolean;
   handleSuccessfulLogin: () => void;
-  isCredentialsCorrect: (credentials: CredentialsInterface) => boolean;
+  isCredentialsCorrect: (credentials: TCredentials) => boolean;
   loginExpiryTime: string;
   logoutEarly: () => void;
-}
+};
 
-export interface CredentialsInterface {
+export type TCredentials = {
   password: string;
   username: string;
-}
+};
 
 export function checkLoginExpired(loginExpiry: string) {
   const msNow = Date.now(); // Compare times in milliseconds since 1970
   const msExpiry = new Date(loginExpiry).getTime();
-  return msNow > msExpiry;
+  return msNow > msExpiry; // true means expiry is in the past
 }
 
 export const EXPIRY_MINUTES = 10;
@@ -38,7 +38,7 @@ export function getDateInFuture(minutes: number, seconds: number) {
   return expiryDate.toString();
 }
 
-export function isCredentialsCorrect(credentials: CredentialsInterface) {
+export function isCredentialsCorrect(credentials: TCredentials) {
   return credentials.username === "incard" && credentials.password === "incard";
 }
 
