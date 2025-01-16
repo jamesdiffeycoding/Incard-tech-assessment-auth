@@ -40,7 +40,9 @@ export default function SignIn() {
       <h2 className="">Log in to your Incard account.</h2>
       <label className="text-left">
         Username{" "}
-        {errors.username && <span className="text-red-400">- too short</span>}
+        {errors.username && (
+          <span className="text-red-400">- must be 5 characters or more</span>
+        )}
         <input
           {...register("username", {
             required: true,
@@ -55,7 +57,9 @@ export default function SignIn() {
       </label>
       <label className="text-left">
         Password{" "}
-        {errors.password && <span className="text-red-400">- too short</span>}
+        {errors.password && (
+          <span className="text-red-400">- must be 5 characters or more</span>
+        )}
         <div className="w-full relative">
           <img
             alt="Show password icon"
