@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuthContext } from "../app/context/AuthContext";
 import { redirect } from "next/navigation";
 import { TCredentials } from "@/utils";
+import Image from "next/image";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +62,7 @@ export default function SignIn() {
           <span className="text-red-400">- must be 5 characters or more</span>
         )}
         <div className="w-full relative">
-          <img
+          <Image
             alt="Show password icon"
             className="text-white m-[0.7rem] absolute right-0 hover:cursor-pointer"
             onClick={toggleShowPassword}
