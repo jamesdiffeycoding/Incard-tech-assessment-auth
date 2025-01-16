@@ -52,7 +52,7 @@ export default function Home() {
       <section className="custom-pane">
         <Image
           alt="platform mockup"
-          src="/mockup.png"
+          src="/mockupPane.png"
           width={2074}
           height={1744}
           className="custom-pane w-full h-screen object-cover"
