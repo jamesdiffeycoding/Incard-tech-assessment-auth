@@ -8,7 +8,7 @@ export default function HeaderLogo() {
         <Image
           width={90} /* px */
           height={50} /* px */
-          src="/IncardLogo.jpg"
+          src="/IncardLogo.png"
           alt="Incard Logo"
         />
       </Link>

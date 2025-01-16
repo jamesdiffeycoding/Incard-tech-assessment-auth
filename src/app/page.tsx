@@ -37,9 +37,9 @@ export default function Login() {
       <section className="custom-pane">
         <Image
           alt="login image"
-          src="/loginImage.jpg"
-          width={500}
-          height={500}
+          src="/loginImage.png"
+          width={1420}
+          height={2048}
           className="custom-pane w-full h-screen object-cover"
         />
       </section>
