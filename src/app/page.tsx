@@ -27,7 +27,7 @@ export default function Login() {
     <div className="custom-grid h-full w-full">
       {/* LEFT PANE ALWAYS SHOWS */}
       <section className="flex flex-col justify-center items-center">
-        <div className="max-w-[467px] w-full p-4">
+        <div className="max-w-[467px] w-full p-4 h-screen flex flex-col justify-center">
           <HeaderLogo />
           <SignIn />
           <Footer />
