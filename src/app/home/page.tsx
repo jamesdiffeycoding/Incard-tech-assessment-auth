@@ -10,7 +10,8 @@ import { useAuthContext } from "../context/AuthContext";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { loginExpiryTime, checkLoginExpired, logoutEarly } = useAuthContext();
+  const { loginExpiryTime, checkLoginExpired, setExpiryInPastAndRedirect } =
+    useAuthContext();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,7 +33,7 @@ export default function Home() {
           <HomePageInfo
             checkLoginExpired={checkLoginExpired}
             loginExpiryTime={loginExpiryTime}
-            logoutEarly={logoutEarly}
+            setExpiryInPastAndRedirect={setExpiryInPastAndRedirect}
           />
           <Footer />
         </div>

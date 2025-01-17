@@ -8,17 +8,15 @@ import {
   EXPIRY_MINUTES,
   EXPIRY_SECONDS,
   getDateInFuture,
-  isCredentialsCorrect,
   LOGIN_EXPIRY_KEY,
   OLD_DATE,
 } from "@/utils";
 
 const defaultAuthContext: TAuthContext = {
   loginExpiryTime: OLD_DATE,
-  isCredentialsCorrect: () => false,
   checkLoginExpired: () => false,
-  handleSuccessfulLogin: () => {},
-  logoutEarly: () => {},
+  setExpiryInFutureAndRedirect: () => {},
+  setExpiryInPastAndRedirect: () => {},
 };
 
 const AuthContext = createContext<TAuthContext>(defaultAuthContext);
@@ -30,12 +28,6 @@ export function useAuthContext() {
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
   const [loginExpiryTime, setLoginExpiryTime] = useState(OLD_DATE);
 
-  function handleSuccessfulLogin() {
-    const expiryDateStr = getDateInFuture(EXPIRY_MINUTES, EXPIRY_SECONDS);
-    setLoginExpiryTime(expiryDateStr);
-    redirect("/home");
-  }
-
   useEffect(() => {
     const storedExpiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
     if (storedExpiryTime) {
@@ -43,7 +35,13 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  function logoutEarly() {
+  function setExpiryInFutureAndRedirect() {
+    const expiryDateStr = getDateInFuture(EXPIRY_MINUTES, EXPIRY_SECONDS);
+    setLoginExpiryTime(expiryDateStr);
+    redirect("/home");
+  }
+
+  function setExpiryInPastAndRedirect() {
     setLoginExpiryTime(OLD_DATE);
     redirect("/");
   }
@@ -57,9 +55,8 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
       value={{
         loginExpiryTime,
         checkLoginExpired,
-        handleSuccessfulLogin,
-        isCredentialsCorrect,
-        logoutEarly,
+        setExpiryInFutureAndRedirect,
+        setExpiryInPastAndRedirect,
       }}
     >
       {children}

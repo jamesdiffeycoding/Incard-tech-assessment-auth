@@ -5,7 +5,7 @@ import HeaderLogo from "@/components/HeaderLogo";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { REFRESH_FREQUENCY_IN_MS } from "@/utils";
-import SignIn from "../components/SignIn";
+import SignIn from "@/components/SignIn";
 import { useAuthContext } from "./context/AuthContext";
 import { useEffect } from "react";
 

@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const { handleSuccessfulLogin, isCredentialsCorrect } = useAuthContext();
+  const { setExpiryInFutureAndRedirect } = useAuthContext();
   const [wrongCredentialsDisplay, setWrongCredentialsDisplay] = useState(false);
   const {
     register,
@@ -15,15 +15,20 @@ export default function SignIn() {
     handleSubmit,
   } = useForm<TCredentials>();
 
+  function isCredentialsCorrect(credentials: TCredentials) {
+    return (
+      credentials.username === "incard" && credentials.password === "incard"
+    );
+  }
+
   function onSubmit(data: TCredentials) {
     if (
-      handleSuccessfulLogin === undefined ||
+      setExpiryInFutureAndRedirect === undefined ||
       isCredentialsCorrect === undefined
     )
       return;
     if (isCredentialsCorrect(data)) {
-      handleSuccessfulLogin();
-      redirect("/home");
+      setExpiryInFutureAndRedirect();
     } else {
       changeWrongCredentialsDisplay(true);
     }

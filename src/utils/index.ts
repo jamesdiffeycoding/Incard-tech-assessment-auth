@@ -1,9 +1,9 @@
 export type TAuthContext = {
   checkLoginExpired: (loginExpiry: string) => boolean;
-  handleSuccessfulLogin?: () => void;
+  setExpiryInFutureAndRedirect?: () => void;
   isCredentialsCorrect?: (credentials: TCredentials) => boolean;
   loginExpiryTime: string;
-  logoutEarly: () => void;
+  setExpiryInPastAndRedirect: () => void;
 };
 
 export type TCredentials = {
@@ -36,10 +36,6 @@ export function getDateInFuture(minutes: number, seconds: number) {
   expiryDate.setMinutes(expiryDate.getMinutes() + minutes);
   expiryDate.setSeconds(expiryDate.getSeconds() + seconds);
   return expiryDate.toString();
-}
-
-export function isCredentialsCorrect(credentials: TCredentials) {
-  return credentials.username === "incard" && credentials.password === "incard";
 }
 
 export const LOGIN_EXPIRY_KEY = "login-expiry"; // local storage key
