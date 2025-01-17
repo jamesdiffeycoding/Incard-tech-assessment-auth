@@ -53,6 +53,7 @@ export default function SignIn() {
           autoCorrect="off"
           className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
           onFocus={() => changeWrongCredentialsDisplay(false)}
+          required={true}
           spellCheck="false"
         />
       </label>
@@ -84,6 +85,7 @@ export default function SignIn() {
           autoCorrect="off"
           className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
           onFocus={() => changeWrongCredentialsDisplay(false)}
+          required={true}
           spellCheck="false"
           type={showPassword ? "text" : "password"}
         ></input>
