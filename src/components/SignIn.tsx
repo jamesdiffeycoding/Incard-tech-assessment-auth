@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { redirect } from "next/navigation";
-import { TCredentials } from "@/utils";
+import { isCredentialsCorrect, TCredentials } from "@/utils";
 import { useAuthContext } from "../app/context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -14,12 +13,6 @@ export default function SignIn() {
     formState: { errors },
     handleSubmit,
   } = useForm<TCredentials>();
-
-  function isCredentialsCorrect(credentials: TCredentials) {
-    return (
-      credentials.username === "incard" && credentials.password === "incard"
-    );
-  }
 
   function onSubmit(data: TCredentials) {
     if (
@@ -38,6 +31,7 @@ export default function SignIn() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="grid gap-6 grid-cols-1 w-full"
+      method="post"
     >
       <h1 className="text-2xl p-0 m-0">Hello!</h1>
       <h2 className="">Log in to your Incard account.</h2>
