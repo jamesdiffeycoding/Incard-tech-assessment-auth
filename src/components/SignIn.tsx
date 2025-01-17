@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthContext } from "../app/context/AuthContext";
 import { redirect } from "next/navigation";
 import { TCredentials } from "@/utils";
@@ -41,27 +41,39 @@ export default function SignIn() {
       <h2 className="">Log in to your Incard account.</h2>
       <label className="text-left">
         Username{" "}
-        {errors.username && (
-          <span className="text-red-400">- must be 5 characters or more</span>
+        {wrongCredentialsDisplay ? (
+          <span className="text-red-500 text-center">
+            - username or password incorrect.
+          </span>
+        ) : (
+          errors.username && (
+            <span className="text-red-400">- min 5 characters </span>
+          )
         )}
         <input
           {...register("username", {
             required: true,
             minLength: 5,
+            onChange: () => changeWrongCredentialsDisplay(false),
           })}
           aria-label="username"
           autoCorrect="off"
-          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
-          onFocus={() => changeWrongCredentialsDisplay(false)}
+          className={`w-full px-2 py-1 block rounded bg-black focus:bg-slate-900 outline-none text-white border-2 ${
+            wrongCredentialsDisplay || errors.username
+              ? "border-red-300"
+              : "border-slate-400 hover:border-slate-200 focus:border-lime-400"
+          } `}
           required={true}
           spellCheck="false"
         />
       </label>
       <label className="text-left">
         Password{" "}
-        {errors.password && (
-          <span className="text-red-400">- must be 5 characters or more</span>
-        )}
+        {wrongCredentialsDisplay
+          ? ""
+          : errors.password && (
+              <span className="text-red-400">- min 5 characters </span>
+            )}
         <div className="w-full relative">
           <Image
             alt="Show password icon"
@@ -80,10 +92,15 @@ export default function SignIn() {
           {...register("password", {
             required: true,
             minLength: 5,
+            onChange: () => changeWrongCredentialsDisplay(false),
           })}
           aria-label="password"
           autoCorrect="off"
-          className="w-full px-2 py-1 block rounded bg-black outline-none text-white border-2 border-slate-400 hover:border-slate-200 focus:border-lime-400"
+          className={`w-full px-2 py-1 block rounded bg-black focus:bg-slate-900 outline-none text-white border-2 ${
+            wrongCredentialsDisplay || errors.password
+              ? "border-red-300"
+              : "border-slate-400 hover:border-slate-200 focus:border-lime-400"
+          } `}
           onFocus={() => changeWrongCredentialsDisplay(false)}
           required={true}
           spellCheck="false"
@@ -97,15 +114,6 @@ export default function SignIn() {
           value="Log in"
         />
       </div>
-      {wrongCredentialsDisplay && (
-        <button
-          className="text-red-500 text-center"
-          onClick={() => changeWrongCredentialsDisplay(false)}
-          onFocus={() => changeWrongCredentialsDisplay(false)}
-        >
-          Either username or password incorrect.
-        </button>
-      )}
     </form>
   );
 }
