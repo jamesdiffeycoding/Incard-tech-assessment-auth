@@ -16,8 +16,11 @@ export default function HomePageInfo({
         <>
           <h1 className="text-2xl p-0 m-0">Welcome Back!</h1>
           <h2>
-            {`At ${loginExpiryTime.slice(16, 24)} GMT you will be
-              redirected to login again.`}
+            At{" "}
+            <span className="text-lime-300 font-bold">
+              {loginExpiryTime.slice(16, 24)}{" "}
+            </span>{" "}
+            GMT you will be redirected to login again.
           </h2>
         </>
       )}
