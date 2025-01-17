@@ -8,7 +8,6 @@ import {
   EXPIRY_MINUTES,
   EXPIRY_SECONDS,
   getDateInFuture,
-  isClientSide,
   isCredentialsCorrect,
   LOGIN_EXPIRY_KEY,
   OLD_DATE,
@@ -38,11 +37,9 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    if (isClientSide) {
-      const storedExpiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
-      if (storedExpiryTime) {
-        setLoginExpiryTime(storedExpiryTime);
-      }
+    const storedExpiryTime = localStorage.getItem(LOGIN_EXPIRY_KEY);
+    if (storedExpiryTime) {
+      setLoginExpiryTime(storedExpiryTime);
     }
   }, []);
 
@@ -52,9 +49,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    if (isClientSide) {
-      localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
-    }
+    localStorage.setItem(LOGIN_EXPIRY_KEY, loginExpiryTime);
   }, [loginExpiryTime]);
 
   return (

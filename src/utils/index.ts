@@ -42,8 +42,6 @@ export function isCredentialsCorrect(credentials: TCredentials) {
   return credentials.username === "incard" && credentials.password === "incard";
 }
 
-export const isClientSide = typeof window !== "undefined";
-
 export const LOGIN_EXPIRY_KEY = "login-expiry"; // local storage key
 
 export const OLD_DATE =
