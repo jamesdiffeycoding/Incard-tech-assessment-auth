@@ -1,13 +1,13 @@
 "use client";
-import { useEffect } from "react";
-import SignIn from "../components/SignIn";
-import { useAuthContext } from "./context/AuthContext";
+import "./globals.css";
+import Footer from "@/components/Footer";
+import HeaderLogo from "@/components/HeaderLogo";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { REFRESH_FREQUENCY_IN_MS } from "@/utils";
-import HeaderLogo from "@/components/HeaderLogo";
-import Footer from "@/components/Footer";
-import Image from "next/image";
-import "./globals.css";
+import SignIn from "../components/SignIn";
+import { useAuthContext } from "./context/AuthContext";
+import { useEffect } from "react";
 
 export default function Login() {
   const { loginExpiryTime, checkLoginExpired } = useAuthContext();

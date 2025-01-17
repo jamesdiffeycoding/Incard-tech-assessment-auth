@@ -1,7 +1,7 @@
 export type TAuthContext = {
   checkLoginExpired: (loginExpiry: string) => boolean;
-  handleSuccessfulLogin: () => void;
-  isCredentialsCorrect: (credentials: TCredentials) => boolean;
+  handleSuccessfulLogin?: () => void;
+  isCredentialsCorrect?: (credentials: TCredentials) => boolean;
   loginExpiryTime: string;
   logoutEarly: () => void;
 };

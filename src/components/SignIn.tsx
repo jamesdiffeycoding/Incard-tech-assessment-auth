@@ -1,9 +1,9 @@
-import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
-import { useAuthContext } from "../app/context/AuthContext";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { TCredentials } from "@/utils";
-import Image from "next/image";
+import { useAuthContext } from "../app/context/AuthContext";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +16,11 @@ export default function SignIn() {
   } = useForm<TCredentials>();
 
   function onSubmit(data: TCredentials) {
+    if (
+      handleSuccessfulLogin === undefined ||
+      isCredentialsCorrect === undefined
+    )
+      return;
     if (isCredentialsCorrect(data)) {
       handleSuccessfulLogin();
       redirect("/home");
@@ -29,7 +34,7 @@ export default function SignIn() {
   }
 
   function toggleShowPassword() {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   }
 
   return (
@@ -37,7 +42,7 @@ export default function SignIn() {
       onSubmit={handleSubmit(onSubmit)}
       className="grid gap-6 grid-cols-1 w-full"
     >
-      <h1 className="text-2xl p-0 m=0">Hello!</h1>
+      <h1 className="text-2xl p-0 m-0">Hello!</h1>
       <h2 className="">Log in to your Incard account.</h2>
       <label className="text-left">
         Username{" "}
