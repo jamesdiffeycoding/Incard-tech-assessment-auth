@@ -21,7 +21,7 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 - create 2-3 unit tests (I added additional E2E tests)
 - deploy the app to Vercel
 
-## Decisions and guidance
+## Decisions
 
 - NextJS used for SSR
 - Vitest used for Unit testing: currently cover self-built functions, such as confirming valid credential inputs or generating login expiry dates in the future.
