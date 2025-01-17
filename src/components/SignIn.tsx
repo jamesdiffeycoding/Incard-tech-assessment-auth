@@ -30,16 +30,8 @@ export default function SignIn() {
     if (isCredentialsCorrect(data)) {
       setExpiryInFutureAndRedirect();
     } else {
-      changeWrongCredentialsDisplay(true);
+      setWrongCredentialsDisplay(true);
     }
-  }
-
-  function changeWrongCredentialsDisplay(value: boolean) {
-    setWrongCredentialsDisplay(value);
-  }
-
-  function toggleShowPassword() {
-    setShowPassword((prev) => !prev);
   }
 
   return (
@@ -64,7 +56,7 @@ export default function SignIn() {
           {...register("username", {
             required: true,
             minLength: 5,
-            onChange: () => changeWrongCredentialsDisplay(false),
+            onChange: () => setWrongCredentialsDisplay(false),
           })}
           aria-label="username"
           autoCorrect="off"
@@ -88,7 +80,9 @@ export default function SignIn() {
           <Image
             alt="Show password icon"
             className="text-white m-[0.7rem] absolute right-0 hover:cursor-pointer"
-            onClick={toggleShowPassword}
+            onClick={() => {
+              setShowPassword((prev) => !prev);
+            }}
             height={16}
             src={
               showPassword
@@ -102,7 +96,7 @@ export default function SignIn() {
           {...register("password", {
             required: true,
             minLength: 5,
-            onChange: () => changeWrongCredentialsDisplay(false),
+            onChange: () => setWrongCredentialsDisplay(false),
           })}
           aria-label="password"
           autoCorrect="off"
@@ -111,7 +105,7 @@ export default function SignIn() {
               ? "border-red-300"
               : "border-slate-400 hover:border-slate-200 focus:border-lime-400"
           } `}
-          onFocus={() => changeWrongCredentialsDisplay(false)}
+          onFocus={() => setWrongCredentialsDisplay(false)}
           required={true}
           spellCheck="false"
           type={showPassword ? "text" : "password"}
