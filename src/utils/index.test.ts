@@ -1,6 +1,4 @@
-// ABOUT
-// To run these tests use npm run test.
-// To create a new unit test file, append the file with test.ts.
+// These unit tests can be run with npm run test
 
 import { expect, test } from "vitest";
 import {

@@ -33,7 +33,7 @@ export default function Login() {
           <Footer />
         </div>
       </section>
-      {/* RIGHT PANE - WIDE SCREENS ONLY */}
+      {/* RIGHT PANE ON WIDE SCREENS ONLY */}
       <section className="custom-pane">
         <Image
           alt="login image"

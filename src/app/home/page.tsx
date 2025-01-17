@@ -37,7 +37,7 @@ export default function Home() {
           <Footer />
         </div>
       </section>
-      {/* RIGHT PANE - WIDE SCREENS ONLY */}
+      {/* RIGHT PANE ON WIDE SCREENS ONLY */}
       <section className="custom-pane">
         <Image
           alt="platform mockup"

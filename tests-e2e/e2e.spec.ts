@@ -1,6 +1,4 @@
-// ABOUT
-// To run these tests, run the dev server (npm run dev) and then run the tests (npm run pwt-ui).
-// To create a new e2e test file, append the file with spec.ts.
+// These end to end tests can be run with npm run dev + npm run pwt-ui
 
 import { test, expect } from "@playwright/test";
 import {
