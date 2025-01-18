@@ -44,9 +44,7 @@ test("Session remains until expiration then redirects", async ({ page }) => {
   await expect(page).toHaveURL(SERVER + "/");
 });
 
-test("setExpiryInPastAndRedirect button redirects to login", async ({
-  page,
-}) => {
+test("handleLogoutAndRedirect button redirects to login", async ({ page }) => {
   await page.goto(SERVER);
   const username = page.getByLabel("username");
   await username.fill("incard");
@@ -55,9 +53,9 @@ test("setExpiryInPastAndRedirect button redirects to login", async ({
   const submitButton = page.getByRole("button", { name: "Log in" });
   await submitButton.click();
   await expect(page).toHaveURL(SERVER + "/home");
-  const setExpiryInPastAndRedirectButton = page.getByRole("button", {
+  const handleLogoutAndRedirectButton = page.getByRole("button", {
     name: "Log out early",
   });
-  await setExpiryInPastAndRedirectButton.click();
+  await handleLogoutAndRedirectButton.click();
   await expect(page).toHaveURL(SERVER + "/");
 });

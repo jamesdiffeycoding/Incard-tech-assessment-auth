@@ -15,8 +15,8 @@ import {
 const defaultAuthContext: TAuthContext = {
   loginExpiryTime: OLD_DATE,
   checkLoginExpired: () => false,
-  setExpiryInFutureAndRedirect: () => {},
-  setExpiryInPastAndRedirect: () => {},
+  handleValidLoginAndRedirect: () => {},
+  handleLogoutAndRedirect: () => {},
 };
 
 const AuthContext = createContext<TAuthContext>(defaultAuthContext);
@@ -35,13 +35,13 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  function setExpiryInFutureAndRedirect() {
+  function handleValidLoginAndRedirect() {
     const expiryDateStr = getDateInFuture(EXPIRY_MINUTES, EXPIRY_SECONDS);
     setLoginExpiryTime(expiryDateStr);
     redirect("/home");
   }
 
-  function setExpiryInPastAndRedirect() {
+  function handleLogoutAndRedirect() {
     setLoginExpiryTime(OLD_DATE);
     redirect("/");
   }
@@ -55,8 +55,8 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
       value={{
         loginExpiryTime,
         checkLoginExpired,
-        setExpiryInFutureAndRedirect,
-        setExpiryInPastAndRedirect,
+        handleValidLoginAndRedirect,
+        handleLogoutAndRedirect,
       }}
     >
       {children}

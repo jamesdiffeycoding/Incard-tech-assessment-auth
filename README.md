@@ -16,7 +16,7 @@ Create a React app in TS with your preferred tools. We are looking at structure,
 - at least two pages: login and home page
 - login should take users to home page - use 'incard' for username/password
 - handle errors if incorrect details entered or session expired (I implemented data validation and an incorrect credentials message)
-- session should be persistent on reload until session expires (I added a login expiration timeout for user security and a setExpiryInPastAndRedirect button)
+- session should be persistent on reload until session expires (I added a login expiration timeout for user security and a handleLogoutAndRedirect button)
 - support SSR
 - create 2-3 unit tests (I added additional E2E tests)
 - deploy the app to Vercel

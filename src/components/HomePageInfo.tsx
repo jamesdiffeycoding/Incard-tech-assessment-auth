@@ -3,7 +3,7 @@ import { TAuthContext } from "@/utils";
 export default function HomePageInfo({
   checkLoginExpired,
   loginExpiryTime,
-  setExpiryInPastAndRedirect,
+  handleLogoutAndRedirect,
 }: TAuthContext) {
   return (
     <section className="grid gap-6 grid-cols-1 w-full">
@@ -26,7 +26,7 @@ export default function HomePageInfo({
       )}
       <button
         className="mt-3 px-4 py-2 max-w-[140px] cursor-pointer rounded-lg bg-orange-300 focus:bg-orange-400 hover:bg-orange-400 text-black"
-        onClick={() => setExpiryInPastAndRedirect()}
+        onClick={() => handleLogoutAndRedirect()}
       >
         {" "}
         Log out early

@@ -6,24 +6,26 @@ import { useState } from "react";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const { setExpiryInFutureAndRedirect } = useAuthContext();
-  const [wrongCredentialsDisplay, setWrongCredentialsDisplay] = useState(false);
+  const { handleValidLoginAndRedirect } = useAuthContext();
   const {
     register,
     formState: { errors },
     handleSubmit,
+    setError,
   } = useForm<TCredentials>();
 
   function onSubmit(data: TCredentials) {
-    if (
-      setExpiryInFutureAndRedirect === undefined ||
-      checkCredentialsValidity === undefined
-    )
-      return;
     if (checkCredentialsValidity(data)) {
-      setExpiryInFutureAndRedirect();
+      handleValidLoginAndRedirect();
     } else {
-      setWrongCredentialsDisplay(true);
+      setError("username", {
+        type: "string",
+        message: "- incorrect login combination",
+      });
+      setError("password", {
+        type: "string",
+        message: "",
+      });
     }
   }
 
@@ -37,25 +39,21 @@ export default function SignIn() {
       <h2 className="">Log in to your Incard account.</h2>
       <label className="text-left">
         Username{" "}
-        {wrongCredentialsDisplay ? (
-          <span className="text-red-500 text-center">
-            - username or password incorrect.
-          </span>
-        ) : (
-          errors.username && (
-            <span className="text-red-400">- min 5 characters </span>
-          )
+        {errors.username && (
+          <span className="text-red-400">{errors.username.message}</span>
         )}
         <input
           {...register("username", {
             required: true,
-            minLength: 5,
-            onChange: () => setWrongCredentialsDisplay(false),
+            minLength: {
+              value: 5,
+              message: "- must be 5+ chars long",
+            },
           })}
           aria-label="username"
           autoCorrect="off"
           className={`w-full px-2 py-1 block rounded bg-black focus:bg-slate-900 outline-none text-white border-2 ${
-            wrongCredentialsDisplay || errors.username
+            errors.username
               ? "border-red-300"
               : "border-slate-400 hover:border-slate-200 focus:border-lime-400"
           } `}
@@ -65,11 +63,9 @@ export default function SignIn() {
       </label>
       <label className="text-left">
         Password{" "}
-        {wrongCredentialsDisplay
-          ? ""
-          : errors.password && (
-              <span className="text-red-400">- min 5 characters </span>
-            )}
+        {errors.password && (
+          <span className="text-red-400">{errors.password.message}</span>
+        )}
         <div className="w-full relative">
           <Image
             alt="Show password icon"
@@ -89,17 +85,15 @@ export default function SignIn() {
         <input
           {...register("password", {
             required: true,
-            minLength: 5,
-            onChange: () => setWrongCredentialsDisplay(false),
+            minLength: { value: 5, message: "- must be 5+ chars long" },
           })}
           aria-label="password"
           autoCorrect="off"
           className={`w-full px-2 py-1 block rounded bg-black focus:bg-slate-900 outline-none text-white border-2 ${
-            wrongCredentialsDisplay || errors.password
+            errors.password
               ? "border-red-300"
               : "border-slate-400 hover:border-slate-200 focus:border-lime-400"
           } `}
-          onFocus={() => setWrongCredentialsDisplay(false)}
           required={true}
           spellCheck="false"
           type={showPassword ? "text" : "password"}
