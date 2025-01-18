@@ -10,7 +10,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { loginExpiryTime, checkLoginExpired, handleLogoutAndRedirect } =
+  const { checkLoginExpired, handleLogoutAndRedirect, loginExpiryTime } =
     useAuthContext();
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export default function Home() {
           <HeaderLogo />
           <HomePageInfo
             checkLoginExpired={checkLoginExpired}
-            loginExpiryTime={loginExpiryTime}
             handleLogoutAndRedirect={handleLogoutAndRedirect}
+            loginExpiryTime={loginExpiryTime}
           />
           <Footer />
         </div>
