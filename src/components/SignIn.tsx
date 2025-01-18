@@ -15,7 +15,7 @@ export default function SignIn() {
   } = useForm<TCredentials>();
 
   function onSubmit(data: TCredentials) {
-    if (checkCredentialsValidity(data)) {
+    if (checkCredentialsValidity(data) && handleValidLoginAndRedirect) {
       handleValidLoginAndRedirect();
     } else {
       setError("username", {
