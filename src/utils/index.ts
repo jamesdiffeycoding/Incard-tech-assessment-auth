@@ -1,7 +1,7 @@
 export type TAuthContext = {
   checkLoginExpired: (loginExpiry: string) => boolean;
   setExpiryInFutureAndRedirect?: () => void;
-  isCredentialsCorrect?: (credentials: TCredentials) => boolean;
+  checkCredentialsValidity?: (credentials: TCredentials) => boolean;
   loginExpiryTime: string;
   setExpiryInPastAndRedirect: () => void;
 };
@@ -38,7 +38,7 @@ export function getDateInFuture(minutes: number, seconds: number) {
   return expiryDate.toString();
 }
 
-export function isCredentialsCorrect(credentials: TCredentials) {
+export function checkCredentialsValidity(credentials: TCredentials) {
   return credentials.username === "incard" && credentials.password === "incard";
 }
 

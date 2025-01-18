@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { isCredentialsCorrect, TCredentials } from "@/utils";
+import { checkCredentialsValidity, TCredentials } from "@/utils";
 import { useAuthContext } from "../app/context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -17,10 +17,10 @@ export default function SignIn() {
   function onSubmit(data: TCredentials) {
     if (
       setExpiryInFutureAndRedirect === undefined ||
-      isCredentialsCorrect === undefined
+      checkCredentialsValidity === undefined
     )
       return;
-    if (isCredentialsCorrect(data)) {
+    if (checkCredentialsValidity(data)) {
       setExpiryInFutureAndRedirect();
     } else {
       setWrongCredentialsDisplay(true);

@@ -4,14 +4,14 @@ import { expect, test } from "vitest";
 import {
   checkLoginExpired,
   getDateInFuture,
-  isCredentialsCorrect,
+  checkCredentialsValidity,
   OLD_DATE,
 } from ".";
 
 test("Incard as username/password credentials valid.", () => {
-  expect(isCredentialsCorrect({ username: "incard", password: "incard" })).toBe(
-    true
-  );
+  expect(
+    checkCredentialsValidity({ username: "incard", password: "incard" })
+  ).toBe(true);
 });
 
 test("Expired login registers as invalid.", () => {
